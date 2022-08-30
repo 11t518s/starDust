@@ -13,6 +13,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
       </list>
     </option>
@@ -29,6 +30,7 @@
   <component name="ProjectId" id="2E2BSUBOkuCkqWkKoaIdnyZqTbF" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="2" id="Remove" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -73,7 +75,7 @@
       <workItem from="1661784679140" duration="1026000" />
       <workItem from="1661785718911" duration="301000" />
       <workItem from="1661786032069" duration="105000" />
-      <workItem from="1661786151261" duration="258000" />
+      <workItem from="1661786151261" duration="4732000" />
     </task>
     <servers />
   </component>
