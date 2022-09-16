@@ -1,20 +1,15 @@
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
-import { useState } from "react";
-import { RecoilRoot } from "recoil";
+import { AppProps } from "next/app";
+import { initializeFirebase } from "../apis/firebaseConfig";
+import { CacheProvider } from "@emotion/react";
+import { cache } from "@emotion/css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [queryClient] = useState(() => new QueryClient());
-
+  initializeFirebase();
   return (
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydrateState}>
-          <Component {...pageProps} />
-        </Hydrate>
-      </QueryClientProvider>
-    </RecoilRoot>
+    <CacheProvider value={cache}>
+      <Component {...pageProps} />
+    </CacheProvider>
   );
 }
 
