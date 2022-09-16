@@ -1,7 +1,5 @@
-import type { NextPage } from "next";
+import React from "react";
 
-const Home: NextPage = () => {
-  return <div>start</div>;
-};
-
-export default Home;
+export default function Home({}) {
+  return <>asdfasdf</>;
+}
