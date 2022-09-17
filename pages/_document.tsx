@@ -18,10 +18,6 @@ export default class AppDocument extends Document {
       ...initialProps,
       styles: (
         <React.Fragment>
-          <Script
-            strategy="beforeInteractive"
-            src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
-          />
           {initialProps.styles}
           <style
             data-emotion-css={styles.ids.join(" ")}
@@ -35,7 +31,12 @@ export default class AppDocument extends Document {
   render(): JSX.Element {
     return (
       <Html>
-        <Head />
+        <Head>
+          <Script
+            strategy="beforeInteractive"
+            src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />

@@ -11,8 +11,6 @@ const PORT = 3000;
 app.prepare().then(() => {
   http
     .createServer((req, res) => {
-      // Be sure to pass `true` as the second argument to `url.parse`.
-      // This tells it to parse the query portion of the URL.
       const parsedUrl = parse(req.url, true);
       handle(req, res, parsedUrl);
     })
@@ -30,8 +28,6 @@ app.prepare().then(() => {
 
   https
     .createServer(options, function (req, res) {
-      // Be sure to pass `true` as the second argument to `url.parse`.
-      // This tells it to parse the query portion of the URL.
       const parsedUrl = parse(req.url, true);
       handle(req, res, parsedUrl);
     })

@@ -1,6 +1,6 @@
 import React, { FormEvent, useRef, useState } from "react";
-import { confirmSignIn, signIn } from "../../apis/auth";
 import { useRouter } from "next/router";
+import { confirmSignIn, signIn } from "../../apis/auth";
 
 const Index = () => {
   const router = useRouter();
@@ -72,7 +72,7 @@ const Index = () => {
     const confirmResult = await confirmSignIn(confirmCode);
     if (confirmResult.result) {
       console.log(confirmResult);
-      await router.push("/catch");
+      await router.push("/map");
     } else {
       alert("코드 인증에 실패했습니다!");
     }

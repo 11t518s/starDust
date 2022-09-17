@@ -1,5 +1,7 @@
-export const dustPositions = [
-  { lat: 37.496146, lng: 126.957487 },
-  { lat: 37.496156, lng: 126.957497 },
-  { lat: 37.496166, lng: 126.957507 },
+import { DustPositionType } from "./types";
+
+export const DustPositionsMock: DustPositionType[] = [
+  { lat: 37.497146, lng: 126.957487, dustImagePath: "" },
+  { lat: 37.499156, lng: 126.958497, dustImagePath: "" },
+  { lat: 37.498166, lng: 126.957507, dustImagePath: "" },
 ];
