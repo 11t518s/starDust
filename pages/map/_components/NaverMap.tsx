@@ -1,19 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
-import { DustPositionsMock } from "../../../mock/dustPositionsMock";
+import { dustPosition } from "../../../mock/dustPositionsMock";
+import { dustApi } from "../../../apis/dust";
+
+const FIRST_CENTER_LAT = 37.496146;
+const FIRST_CENTER_LNG = 126.957487;
 
 const NaverMap = () => {
   const { naver } = window;
 
   const mapElement = useRef<HTMLDivElement | null>(null);
+
   const [myCurrentPosition, setMyCurrentPosition] = useState({
-    lat: 37.496146,
-    lng: 126.957487,
+    lat: FIRST_CENTER_LAT,
+    lng: FIRST_CENTER_LNG,
   });
 
-  const mapLocation = new naver.maps.LatLng(
-    myCurrentPosition.lat,
-    myCurrentPosition.lng
-  );
+  // 내 지금 좌표를 숭실대 가운데 어딘가로 가정
+  const mapLocation = new naver.maps.LatLng(FIRST_CENTER_LAT, FIRST_CENTER_LNG);
 
   const mapOptions: naver.maps.MapOptions = {
     center: mapLocation,
@@ -24,68 +27,78 @@ const NaverMap = () => {
     },
   };
 
-  // mapElement가 있다고 강제
-  const map =
-    mapElement.current && new naver.maps.Map(mapElement.current, mapOptions);
-
   useEffect(() => {
-    painDefaultMap();
+    if (!mapElement.current) return;
+    const map = new naver.maps.Map(mapElement.current, mapOptions);
 
-    //
+    // 기본 지도를 그림
+    const snapShotMyLocation = () =>
+      navigator.geolocation.watchPosition((position) => {
+        new naver.maps.Marker({
+          position: new naver.maps.LatLng(
+            position.coords.latitude,
+            position.coords.longitude
+          ),
+          map,
+        });
+        // setMyCurrentPosition({
+        //   lat: position.coords.latitude,
+        //   lng: position.coords.longitude,
+        // });
+      });
 
-    // rePaintMyPosition();
-    // return () => {
-    //   clearInterval(timer);
-    // };
-
-    // 지도에 표시할 위치의 위도와 경도 좌표를 파라미터로 넣어줍니다.
+    snapShotMyLocation();
+    paintMyPosition(naver, map);
+    paintDustPosition(naver, map);
+    return () => {};
   }, []);
+
+  useEffect(() => {}, [myCurrentPosition]);
 
   return (
     <div>
       <div
         ref={mapElement}
-        style={{ width: "500px", height: "500px" }}
+        style={{ width: "400px", height: "30vh" }}
         id={"map"}
       />
     </div>
   );
-  function painDefaultMap() {
-    if (!map || !naver) return;
-    DustPositionsMock.map((mock) => {
-      const { lat, lng } = mock;
+
+  /**
+   * 먼지 위치 나타내는 로직
+   * TODO 30초에 한번 받아오는 것으로 수정해야함
+   */
+  async function paintDustPosition(naver: any, map: naver.maps.Map) {
+    // const dustPosition = await dustApi.getDustPosition();
+
+    dustPosition.map((dust) => {
+      const { lat, lng, imagePath } = dust;
       const dustLocation = new naver.maps.LatLng(lat, lng);
 
       new naver.maps.Marker({
         position: dustLocation,
         map,
         icon: "https://picsum.photos/20/20",
+        // icon: imagePath,
       });
-    });
-
-    const myPosition = new naver.maps.LatLng(37.496146, 126.957487);
-
-    new naver.maps.Marker({
-      position: myPosition,
-      map,
-      icon: "https://picsum.photos/20/20",
     });
   }
 
-  function rePaintMyPosition() {
-    // 해당 로직으로 내 위치로 추적 가능
-    const timer = setInterval(() => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setMyCurrentPosition({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        },
-        (error) => console.error(error)
-      );
-    }, 1000);
-    return clearInterval(timer);
+  /**
+   * 내 위치 아이콘
+   * TODO 실시간 위치 가져와야함
+   */
+
+  function paintMyPosition(naver: any, map: naver.maps.Map) {
+    // const myLocation = new naver.maps.LatLng(
+    //   myCurrentPosition.lat,
+    //   myCurrentPosition.lng
+    // );
+    // new naver.maps.Marker({
+    //   position: myLocation,
+    //   map,
+    // });
   }
 };
 

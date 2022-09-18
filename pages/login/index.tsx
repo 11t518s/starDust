@@ -1,6 +1,6 @@
 import React, { FormEvent, useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { confirmSignIn, signIn } from "../../apis/auth";
+import { authApi } from "../../apis/auth";
 
 const Index = () => {
   const router = useRouter();
@@ -57,8 +57,8 @@ const Index = () => {
 
   async function handleSubmitPhoneNumber(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
-    const signInResult = await signIn(Number(phoneNumber));
-    if (!signInResult.result) {
+    const { result } = await authApi.signIn(phoneNumber);
+    if (!result) {
       alert("핸드폰 번호를 잘 못 입력하셨습니다!, 운영진에게 확인해주세요");
       return;
     }
@@ -69,9 +69,8 @@ const Index = () => {
   async function handleSubmitConfirmCode(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
 
-    const confirmResult = await confirmSignIn(confirmCode);
-    if (confirmResult.result) {
-      console.log(confirmResult);
+    const { result } = await authApi.confirmSignIn(confirmCode);
+    if (result) {
       await router.push("/map");
     } else {
       alert("코드 인증에 실패했습니다!");
