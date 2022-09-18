@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare": "sh init-https.sh",
     "dev": "node server.js",
     "build": "next build",
     "start": "next start",
