@@ -1,12 +1,15 @@
 import React, { FormEvent, useRef, useState } from "react";
-import { confirmSignIn, signIn } from "../../apis/auth";
 import { useRouter } from "next/router";
+import { authApi } from "../../apis/auth";
+import { useRecoilState } from "recoil";
+import { nicknameAtom } from "../../state/atom";
 
 const Index = () => {
   const router = useRouter();
 
+  const [nickname, setNickname] = useRecoilState(nicknameAtom);
+
   const [phoneNumber, setPhoneNumber] = useState<number | string>("");
-  const [nickname, setNickname] = useState("");
   const [isConfirmCodeMode, setIsConfirmCodeMode] = useState(false);
   const [confirmCode, setConfirmCode] = useState("");
 
@@ -19,29 +22,28 @@ const Index = () => {
           type={"number"}
           onChange={handlePhoneNumberChange}
         />
-      </section>
-      <section>
         닉네임 <input value={nickname} onChange={handleNicknameChange} />
+        <button
+          id={"signIn"}
+          disabled={isConfirmCodeMode}
+          onClick={handleSubmitPhoneNumber}
+        >
+          핸드폰 번호 인증하고 게임 시작하기
+        </button>
       </section>
-      <button
-        id={"signIn"}
-        disabled={isConfirmCodeMode}
-        onClick={handleSubmitPhoneNumber}
-      >
-        핸드폰 번호 인증하고 게임 시작하기
-      </button>
       {isConfirmCodeMode ? (
-        <>
+        <section>
           <input value={confirmCode} onChange={handleConfirmCode} />
           <button id={"conformCode"} onClick={handleSubmitConfirmCode}>
             인증번호 확인하기
           </button>
-        </>
+        </section>
       ) : null}
     </form>
   );
   function handlePhoneNumberChange(e: FormEvent<HTMLInputElement>) {
     e.preventDefault();
+
     setPhoneNumber(e.currentTarget.value);
   }
 
@@ -57,9 +59,19 @@ const Index = () => {
 
   async function handleSubmitPhoneNumber(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
-    const signInResult = await signIn(Number(phoneNumber));
-    if (!signInResult.result) {
-      alert("핸드폰 번호를 잘 못 입력하셨습니다!, 운영진에게 확인해주세요");
+    if (Number(phoneNumber) === 0) {
+      alert("핸드폰 번호를 바르게 입력해주세요");
+      return;
+    }
+    if (nickname === "기본닉네임") {
+      alert("닉네임을 변경해주세요!");
+      return;
+    }
+    const { result } = await authApi.signIn(phoneNumber, nickname);
+    if (!result) {
+      alert(
+        "핸드폰 번호를 잘 못 입력하셨습니다! 해당 오류가 지속적으로 발생하면 운영진에게 문의해주세요  "
+      );
       return;
     }
 
@@ -69,10 +81,9 @@ const Index = () => {
   async function handleSubmitConfirmCode(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
 
-    const confirmResult = await confirmSignIn(confirmCode);
-    if (confirmResult.result) {
-      console.log(confirmResult);
-      await router.push("/catch");
+    const { result } = await authApi.confirmSignIn(confirmCode);
+    if (result) {
+      await router.push("/map");
     } else {
       alert("코드 인증에 실패했습니다!");
     }
