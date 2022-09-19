@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { dustPosition } from "../../../mock/dustPositionsMock";
+// import { dustPosition } from "../../../mock/dustPositionsMock";
 import { dustApi } from "../../../apis/dust";
 
 const FIRST_CENTER_LAT = 37.496146;
@@ -70,7 +70,7 @@ const NaverMap = () => {
    * TODO 30초에 한번 받아오는 것으로 수정해야함
    */
   async function paintDustPosition(naver: any, map: naver.maps.Map) {
-    // const dustPosition = await dustApi.getDustPosition();
+    const dustPosition = await dustApi.getDustPosition();
 
     dustPosition.map((dust) => {
       const { lat, lng, imagePath } = dust;
