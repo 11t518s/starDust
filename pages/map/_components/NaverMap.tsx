@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 // import { dustPosition } from "../../../mock/dustPositionsMock";
 import { dustApi } from "../../../apis/dust";
 
-const FIRST_CENTER_LAT = 37.496146;
-const FIRST_CENTER_LNG = 126.957487;
+const FIRST_CENTER_LAT = 37.49638;
+const FIRST_CENTER_LNG = 126.95788;
 
 const NaverMap = () => {
   const { naver } = window;
@@ -61,7 +61,7 @@ const NaverMap = () => {
         ref={mapElement}
         style={{ width: "400px", height: "30vh" }}
         id={"map"}
-      />
+      ></div>
     </div>
   );
 

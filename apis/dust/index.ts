@@ -1,19 +1,22 @@
 import { FirebaseConfig } from "../firebaseConfig";
 import {
-  addDoc,
   collection,
   doc,
+  getDoc,
+  setDoc,
   getDocs,
+  DocumentSnapshot,
   updateDoc,
+  Timestamp,
 } from "@firebase/firestore";
-import { dustColors, DustPositionType } from "./types";
+import { CatchProgress, DustPositionType, catchProgress, Catch } from "./types";
 
 class Dust extends FirebaseConfig {
   private DUST = "dust";
   private SSU = "ssu";
   private DUST_ITEM = "dustItem";
   private CATCH = "catch";
-  private CATCH_TEST_ID = "A6AMvmioNg85elu8XTJf";
+  private STARTED_AT = "startedAt";
 
   private BLACK = "black";
   private BLUE = "blue";
@@ -21,9 +24,8 @@ class Dust extends FirebaseConfig {
   private RED = "red";
   private YELLOW = "yellow";
 
-  async updateDustPosition() {
-    const dust = await addDoc(collection(this.db, this.DUST, this.SSU), {});
-  }
+  private START_DUST_ITEM = 0;
+  private FINISH_DUST_ITEM = 5;
 
   async getDustPosition(): Promise<DustPositionType[]> {
     const dustPositions = await getDocs(
@@ -40,29 +42,49 @@ class Dust extends FirebaseConfig {
     });
   }
 
-  async getDustInfo(uid: number): Promise<any[]> {
-    const dustInfo = await getDocs(
-      collection(this.db, this.DUST, this.SSU, this.CATCH)
+  async getMyCatches(uid: string): Promise<Catch[]> {
+    const myCacheProgress = await getDocs(
+      collection(this.db, this.DUST, this.SSU, this.CATCH, uid, this.DUST_ITEM)
     );
-    return dustInfo.docs.map((data) => data.data());
+    return myCacheProgress.docs.map((data) => data.data() as Catch);
   }
 
-  async ADMIN_updateDustInfo(
-    color: dustColors,
-    lat: DustPositionType["lat"],
-    lng: DustPositionType["lng"]
-  ) {
-    await updateDoc(doc(this.db, this.DUST, this.SSU, this.DUST_ITEM, color), {
-      lat,
-      lng,
+  async getMyCacheProgress(uid: string): Promise<catchProgress> {
+    const status = (await this.getMyCatchDoc(uid)).get("catchProgress");
+    if (status) {
+      return status;
+    } else {
+      return CatchProgress.BeforeStart;
+    }
+  }
+
+  async startMyCatchProgress(uid: string) {
+    await setDoc(doc(this.db, this.DUST, this.SSU, this.CATCH, uid), {
+      startedAt: Timestamp.now(),
+      catchStatus: CatchProgress.InProgress,
+    });
+    return CatchProgress.InProgress;
+  }
+
+  async finishMyCatchProgress(uid: string) {
+    const finishedAt = Timestamp.now();
+    const startedAt = (await this.getMyCatchDoc(uid)).get("startedAt");
+
+    return updateDoc(doc(this.db, this.DUST, this.SSU, this.CATCH, uid), {
+      finishedAt,
+      spent: finishedAt.seconds - startedAt.seconds,
     });
   }
 
-  async catchDustStart(uid: number) {
-    await addDoc(doc(this.db, this.DUST, this.SSU), {});
+  async getMyCatchDoc(uid: string): Promise<DocumentSnapshot> {
+    return await getDoc(doc(this.db, this.DUST, this.SSU, this.CATCH, uid));
   }
-  async catchDust() {}
-  async catchDustFinish() {}
+
+  async changeMyCatchProgress(uid: string, catchProgress: catchProgress) {
+    await setDoc(doc(this.db, this.DUST, this.SSU, this.CATCH, uid), {
+      catchProgress,
+    });
+  }
 }
 
 export const dustApi = new Dust();

@@ -5,6 +5,11 @@ export type DustPositionType = {
   imagePath: string;
 };
 
+export type Catch = {
+  itemId: string;
+  caughtAt: Date;
+};
+
 export const DustColors = {
   BLACK: "black",
   BLUE: "blue",
@@ -14,3 +19,12 @@ export const DustColors = {
 } as const;
 
 export type dustColors = typeof DustColors[keyof typeof DustColors];
+
+export const CatchProgress = {
+  BeforeStart: "beforeStart",
+  InProgress: "inProgress",
+  Finish: "finish",
+  loading: "loading",
+} as const;
+
+export type catchProgress = typeof CatchProgress[keyof typeof CatchProgress];

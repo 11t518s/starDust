@@ -28,7 +28,6 @@ export class Auth extends FirebaseConfig {
         recaptcha
       );
 
-      console.log(this.auth.currentUser);
       this.auth.currentUser &&
         (await updateProfile(this.auth.currentUser, { displayName: nickname }));
 
@@ -43,9 +42,7 @@ export class Auth extends FirebaseConfig {
 
   async confirmSignIn(confirmCode: string): Promise<PhoneNumberLoginType> {
     try {
-      const test = await (window as any).confirmationResult.confirm(
-        confirmCode
-      );
+      await (window as any).confirmationResult.confirm(confirmCode);
       return { result: true };
     } catch (error) {
       console.error(error);
@@ -53,19 +50,18 @@ export class Auth extends FirebaseConfig {
     }
   }
 
-  async getCurrentUser() {
+  getCurrentUser() {
     return this.auth.currentUser;
   }
 
-  async getLoginStatus() {
-    const state = await onAuthStateChanged(this.auth, (user) => {
+  getLoginStatus() {
+    return onAuthStateChanged(this.auth, (user) => {
       if (user) {
         return user;
       } else {
         return false;
       }
     });
-    console.log(state);
   }
 }
 

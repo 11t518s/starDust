@@ -12,7 +12,7 @@ const Qr = () => {
   const [qrData, setQrData] = useState<string | null>(null);
 
   return (
-    <div>
+    <>
       <button onClick={handleQrReaderOpen}>
         버튼을 눌러서 먼지를 잡아주세요
       </button>
@@ -21,9 +21,9 @@ const Qr = () => {
         <QrReader
           constraints={{ facingMode: "environment" }}
           onResult={handleReadQrData}
-        />
+        ></QrReader>
       )}
-    </div>
+    </>
   );
   function handleQrReaderOpen() {
     setIsQRReader(true);

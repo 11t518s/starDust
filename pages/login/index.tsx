@@ -1,13 +1,11 @@
 import React, { FormEvent, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { authApi } from "../../apis/auth";
-import { useRecoilState } from "recoil";
-import { nicknameAtom } from "../../state/atom";
 
 const Index = () => {
   const router = useRouter();
 
-  const [nickname, setNickname] = useRecoilState(nicknameAtom);
+  const [nickname, setNickname] = useState("");
 
   const [phoneNumber, setPhoneNumber] = useState<number | string>("");
   const [isConfirmCodeMode, setIsConfirmCodeMode] = useState(false);

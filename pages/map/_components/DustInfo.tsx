@@ -1,31 +1,40 @@
 import React, { useEffect, useState } from "react";
-import useAsync from "../../../hooks/useAsync";
 import { dustApi } from "../../../apis/dust";
+import styled from "@emotion/styled";
 
-import * as E from "./styles";
-import { useRecoilValue } from "recoil";
-import { dustPositionSelector } from "../../../state/selector";
 import Image from "next/image";
+import { DustPositionType } from "../../../apis/dust/types";
 
 const DustInfo = () => {
-  const dustPosition = useRecoilValue(dustPositionSelector);
-  getDustInfo();
+  const [dustPosition, setDustPosition] = useState<DustPositionType[]>([]);
+
   useEffect(() => {
-    return () => {};
+    getDustInfo();
   }, []);
 
   return (
-    <E.DustContainer>
-      {dustPosition.map((dust) => (
-        <Image src={dust.imagePath} width={50} height={50} />
+    <DustContainer>
+      {dustPosition.map((dust, index) => (
+        <Image
+          key={index}
+          alt={"dustImage"}
+          src={dust.imagePath}
+          width={50}
+          height={50}
+        />
       ))}
-    </E.DustContainer>
+    </DustContainer>
   );
 
   async function getDustInfo() {
-    const dustInfo = await dustApi.getDustInfo();
-    console.log(dustInfo);
+    const data = await dustApi.getDustPosition();
+    setDustPosition(data);
   }
 };
 
 export default DustInfo;
+
+export const DustContainer = styled.ul`
+  position: absolute;
+  top: 0;
+`;

@@ -13,3 +13,8 @@ export const dustPositionSelector = selector({
     set(_dustInfoRefresher, (v) => v + 1);
   },
 });
+
+export const myInfoSelector = selector({
+  key: "myInfo",
+  get: async ({ get }) => {},
+});
