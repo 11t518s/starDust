@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f81e2a1-4f13-4d01-820f-2f41cca64e84" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/components/modal/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apis/dust/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apis/dust/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apis/dust/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apis/dust/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/map/_components/DustInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/map/_components/DustInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/map/_components/NaverMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/map/_components/NaverMap.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/map/_components/QR.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/map/_components/QrModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/map/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/map/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apis/map/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apis/map/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +26,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$APPLICATION_HOME_DIR$/plugins/NodeJS/lib/NodeJS.jar!/com/jetbrains/nodejs/packageJson/packageJsonSchema.json" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="JsBowerSettings">
+    <bower-package value="" />
+    <bower.json value="" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -66,8 +62,8 @@
     &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;/usr/local/bin/yarn&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/usr/local/lib/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/bongsu/Desktop/starDust/node_modules/typescript/lib&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.tslint&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -112,6 +108,9 @@
       <workItem from="1663804316972" duration="209000" />
       <workItem from="1663804541386" duration="11914000" />
       <workItem from="1663856167486" duration="4041000" />
+      <workItem from="1663860841500" duration="115000" />
+      <workItem from="1663860966685" duration="7000" />
+      <workItem from="1663860985434" duration="6000" />
     </task>
     <task id="LOCAL-00001" summary="feature: css reset">
       <created>1663435451709</created>
