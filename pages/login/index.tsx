@@ -1,6 +1,7 @@
 import React, { FormEvent, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { authApi } from "../../apis/auth";
+import { dustApi } from "../../apis/dust";
 
 const Index = () => {
   const router = useRouter();
@@ -10,6 +11,7 @@ const Index = () => {
   const [phoneNumber, setPhoneNumber] = useState<number | string>("");
   const [isConfirmCodeMode, setIsConfirmCodeMode] = useState(false);
   const [confirmCode, setConfirmCode] = useState("");
+  const [isSubmit, setIsSubmit] = useState(false);
 
   return (
     <form>
@@ -32,7 +34,11 @@ const Index = () => {
       {isConfirmCodeMode ? (
         <section>
           <input value={confirmCode} onChange={handleConfirmCode} />
-          <button id={"conformCode"} onClick={handleSubmitConfirmCode}>
+          <button
+            disabled={isSubmit}
+            id={"conformCode"}
+            onClick={handleSubmitConfirmCode}
+          >
             인증번호 확인하기
           </button>
         </section>
@@ -65,6 +71,8 @@ const Index = () => {
       alert("닉네임을 변경해주세요!");
       return;
     }
+    setIsConfirmCodeMode(true);
+
     const { result } = await authApi.signIn(phoneNumber, nickname);
     if (!result) {
       alert(
@@ -72,18 +80,19 @@ const Index = () => {
       );
       return;
     }
-
-    setIsConfirmCodeMode(true);
   }
 
   async function handleSubmitConfirmCode(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault();
 
+    setIsSubmit(true);
     const { result } = await authApi.confirmSignIn(confirmCode);
     if (result) {
+      await dustApi.setInitialCatchInfo("1", phoneNumber, nickname);
       await router.push("/map");
     } else {
       alert("코드 인증에 실패했습니다!");
+      router.reload();
     }
   }
 };

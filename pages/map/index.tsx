@@ -1,15 +1,18 @@
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
-import Qr from "./_components/QR";
+import QrModal from "./_components/QrModal";
 import DustInfo from "./_components/DustInfo";
 import { dustApi } from "../../apis/dust";
-import { catchProgress, CatchProgress } from "../../apis/dust/types";
+import { Catch, catchProgress, CatchProgress } from "../../apis/dust/types";
 import Loading from "./_components/Loading";
 import BeforeStart from "./_components/BeforeStart";
 import Finish from "./_components/Finish";
+import Modal from "../../components/modal";
+const NaverMap = dynamic(() => import("./_components/NaverMap"));
 
 const Catch = () => {
-  const NaverMap = dynamic(() => import("./_components/NaverMap"));
+  const [myCatch, setMyCatch] = useState<Catch[]>([]);
+
   // TODO 추후 recoil로 이전
   const [catchStatus, setCatchStatus] = useState<catchProgress>(
     CatchProgress.loading
@@ -43,8 +46,8 @@ const Catch = () => {
     <>
       <NaverMap></NaverMap>
       <div>여기에 네이버 지도 나와야지~~</div>
-      <DustInfo></DustInfo>
-      <Qr></Qr>
+      <DustInfo myCatch={myCatch} setMyCatch={setMyCatch} />
+      <QrModal setMyCatch={setMyCatch} />
       <button onClick={handleCatchDust}>누르면 먼지 잡음</button>
       <button onClick={handleFinish}> 이러면 마무리 </button>
     </>

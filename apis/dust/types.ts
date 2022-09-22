@@ -12,10 +12,10 @@ export type Catch = {
 
 export const DustColors = {
   BLACK: "black",
-  BLUE: "blue",
+  GREEN: "green",
+  ORANGE: "orange",
   PURPLE: "purple",
-  RED: "red",
-  YELLOW: "yellow",
+  WHITE: "white",
 } as const;
 
 export type dustColors = typeof DustColors[keyof typeof DustColors];

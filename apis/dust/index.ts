@@ -8,8 +8,15 @@ import {
   DocumentSnapshot,
   updateDoc,
   Timestamp,
+  addDoc,
 } from "@firebase/firestore";
-import { CatchProgress, DustPositionType, catchProgress, Catch } from "./types";
+import {
+  CatchProgress,
+  DustPositionType,
+  catchProgress,
+  Catch,
+  dustColors,
+} from "./types";
 
 class Dust extends FirebaseConfig {
   private DUST = "dust";
@@ -58,21 +65,37 @@ class Dust extends FirebaseConfig {
     }
   }
 
-  async startMyCatchProgress(uid: string) {
+  async setInitialCatchInfo(
+    uid: string,
+    phoneNumber: number | string,
+    nickname: string
+  ) {
     await setDoc(doc(this.db, this.DUST, this.SSU, this.CATCH, uid), {
+      phoneNumber,
+      nickname,
+    });
+  }
+
+  async startMyCatchProgress(uid: string) {
+    await updateDoc(doc(this.db, this.DUST, this.SSU, this.CATCH, uid), {
       startedAt: Timestamp.now(),
-      catchStatus: CatchProgress.InProgress,
+      catchProgress: CatchProgress.InProgress,
     });
     return CatchProgress.InProgress;
   }
 
   async finishMyCatchProgress(uid: string) {
     const finishedAt = Timestamp.now();
-    const startedAt = (await this.getMyCatchDoc(uid)).get("startedAt");
-
-    return updateDoc(doc(this.db, this.DUST, this.SSU, this.CATCH, uid), {
+    const myCatchDoc = await this.getMyCatchDoc(uid);
+    const startedAt = myCatchDoc.get("startedAt");
+    const myProgress = myCatchDoc.get("catchProgress");
+    if (myProgress === CatchProgress.Finish) {
+      return;
+    }
+    await updateDoc(doc(this.db, this.DUST, this.SSU, this.CATCH, uid), {
       finishedAt,
       spent: finishedAt.seconds - startedAt.seconds,
+      catchProgress: CatchProgress.Finish,
     });
   }
 
@@ -80,10 +103,18 @@ class Dust extends FirebaseConfig {
     return await getDoc(doc(this.db, this.DUST, this.SSU, this.CATCH, uid));
   }
 
-  async changeMyCatchProgress(uid: string, catchProgress: catchProgress) {
-    await setDoc(doc(this.db, this.DUST, this.SSU, this.CATCH, uid), {
-      catchProgress,
-    });
+  async catchDust(uid: string, dust: dustColors) {
+    const catchProgress = await this.getMyCatches(uid);
+
+    if (catchProgress.some((item) => item.itemId === dust)) {
+      alert("이미 잡은 먼지입니다!");
+      return;
+    }
+
+    await addDoc(
+      collection(this.db, this.DUST, this.SSU, this.CATCH, uid, this.DUST_ITEM),
+      { itemId: dust, caughtAt: Timestamp.now() }
+    );
   }
 }
 

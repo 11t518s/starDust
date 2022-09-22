@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f81e2a1-4f13-4d01-820f-2f41cca64e84" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/components/modal/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apis/dust/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apis/dust/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apis/dust/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apis/dust/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/map/_components/DustInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/map/_components/DustInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/map/_components/NaverMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/map/_components/NaverMap.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/map/_components/QR.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/map/_components/QrModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/map/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/map/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,34 +50,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Project.color": "28170e",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/bongsu/Desktop/starDust/apis/admin",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "/usr/local/bin/yarn",
-    "prettierjs.PrettierConfiguration.Package": "/usr/local/lib/node_modules/prettier",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "/Users/bongsu/Desktop/starDust/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Project.color&quot;: &quot;28170e&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/bongsu/Desktop/starDust/apis/admin&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;/usr/local/bin/yarn&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/usr/local/lib/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/bongsu/Desktop/starDust/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "GitStage.ChangesTree.GroupingKeys": [
-      "directory",
-      "module",
-      "repository"
+  &quot;keyToStringList&quot;: {
+    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;,
+      &quot;module&quot;,
+      &quot;repository&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/apis/admin" />
@@ -101,6 +109,9 @@
       <workItem from="1663306771748" duration="17197000" />
       <workItem from="1663422268766" duration="34706000" />
       <workItem from="1663504063109" duration="20541000" />
+      <workItem from="1663804316972" duration="209000" />
+      <workItem from="1663804541386" duration="11914000" />
+      <workItem from="1663856167486" duration="4041000" />
     </task>
     <task id="LOCAL-00001" summary="feature: css reset">
       <created>1663435451709</created>
