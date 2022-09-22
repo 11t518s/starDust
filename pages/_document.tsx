@@ -34,7 +34,7 @@ export default class AppDocument extends Document {
         <Head>
           <Script
             strategy="beforeInteractive"
-            src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
+            src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=8xgkkbkue2`}
           />
         </Head>
         <body>
