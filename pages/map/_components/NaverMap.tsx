@@ -1,12 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { dustApi } from "../../../apis/dust";
 
 const FIRST_CENTER_LAT = 37.49638;
 const FIRST_CENTER_LNG = 126.95788;
 
 const NaverMap = () => {
-  const { naver } = window;
-
   const mapElement = useRef<HTMLDivElement | null>(null);
 
   const [myCurrentPosition, setMyCurrentPosition] = useState({
@@ -15,6 +13,10 @@ const NaverMap = () => {
   });
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const { naver } = window;
+
     if (!mapElement.current) return;
 
     // 내 기본 좌표를 출제 부스 앞으로 설정

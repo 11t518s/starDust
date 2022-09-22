@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import QrModal from "./_components/QrModal";
 import DustInfo from "./_components/DustInfo";
 import { dustApi } from "../../apis/dust";
@@ -7,7 +7,6 @@ import { Catch, catchProgress, CatchProgress } from "../../apis/dust/types";
 import Loading from "./_components/Loading";
 import BeforeStart from "./_components/BeforeStart";
 import Finish from "./_components/Finish";
-import Modal from "../../components/modal";
 const NaverMap = dynamic(() => import("./_components/NaverMap"), {
   ssr: false,
 });
