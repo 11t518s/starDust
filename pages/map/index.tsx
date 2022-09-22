@@ -8,7 +8,9 @@ import Loading from "./_components/Loading";
 import BeforeStart from "./_components/BeforeStart";
 import Finish from "./_components/Finish";
 import Modal from "../../components/modal";
-const NaverMap = dynamic(() => import("./_components/NaverMap"));
+const NaverMap = dynamic(() => import("./_components/NaverMap"), {
+  ssr: false,
+});
 
 const Catch = () => {
   const [myCatch, setMyCatch] = useState<Catch[]>([]);
