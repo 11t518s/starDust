@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { useRecoilValue } from "recoil";
-import { dustPositionSelector } from "../../../state/selector";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { DustPositionType } from "../../../apis/dust/types";
-import { dustApi } from "../../../apis/dust";
+import { adminApi } from "../../../apis/admin";
 
 const DustInfo = () => {
-  const dustInfo = useRecoilValue(dustPositionSelector);
+  const [dustPosition, setDustPosition] = useState<DustPositionType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(isLoading);
+
+  useEffect(() => {
+    handleGetDustPosition();
+  }, []);
 
   return (
     <>
@@ -16,7 +17,7 @@ const DustInfo = () => {
         <div>저장하는 중입니당</div>
       ) : (
         <ul>
-          {dustInfo.map((dust, index) => (
+          {dustPosition.map((dust, index) => (
             <li key={`${index}_${dust.imagePath}`}>
               <Image
                 alt={"먼지 이미지"}
@@ -43,7 +44,7 @@ const DustInfo = () => {
     try {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(async (position) => {
-          await dustApi.ADMIN_updateDustInfo(
+          await adminApi.updateDustInfo(
             dustId,
             position.coords.latitude,
             position.coords.longitude
@@ -57,6 +58,13 @@ const DustInfo = () => {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  async function handleGetDustPosition() {
+    setIsLoading(true);
+    const dustInfo = await adminApi.getDustPosition();
+    setDustPosition(dustInfo);
+    setIsLoading(false);
   }
 };
 

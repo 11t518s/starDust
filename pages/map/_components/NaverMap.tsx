@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-// import { dustPosition } from "../../../mock/dustPositionsMock";
 import { dustApi } from "../../../apis/dust";
 
-const FIRST_CENTER_LAT = 37.496146;
-const FIRST_CENTER_LNG = 126.957487;
+const FIRST_CENTER_LAT = 37.49638;
+const FIRST_CENTER_LNG = 126.95788;
 
 const NaverMap = () => {
   const { naver } = window;
@@ -15,25 +14,25 @@ const NaverMap = () => {
     lng: FIRST_CENTER_LNG,
   });
 
-  // 내 지금 좌표를 숭실대 가운데 어딘가로 가정
-  const mapLocation = new naver.maps.LatLng(FIRST_CENTER_LAT, FIRST_CENTER_LNG);
-
-  const mapOptions: naver.maps.MapOptions = {
-    center: mapLocation,
-    zoom: 16,
-    zoomControl: true,
-    zoomControlOptions: {
-      position: naver.maps.Position.TOP_RIGHT,
-    },
-  };
-
   useEffect(() => {
     if (!mapElement.current) return;
+
+    // 내 기본 좌표를 출제 부스 앞으로 설정
+
+    const mapOptions: naver.maps.MapOptions = {
+      center: new naver.maps.LatLng(FIRST_CENTER_LAT, FIRST_CENTER_LNG),
+      zoom: 16,
+      zoomControl: true,
+      zoomControlOptions: {
+        position: naver.maps.Position.TOP_RIGHT,
+      },
+    };
+
     const map = new naver.maps.Map(mapElement.current, mapOptions);
 
     // 기본 지도를 그림
-    const snapShotMyLocation = () =>
-      navigator.geolocation.watchPosition((position) => {
+    const snapShotMyLocation = navigator.geolocation.watchPosition(
+      (position) => {
         new naver.maps.Marker({
           position: new naver.maps.LatLng(
             position.coords.latitude,
@@ -41,16 +40,18 @@ const NaverMap = () => {
           ),
           map,
         });
-        // setMyCurrentPosition({
-        //   lat: position.coords.latitude,
-        //   lng: position.coords.longitude,
-        // });
-      });
+      }
+    );
 
-    snapShotMyLocation();
-    paintMyPosition(naver, map);
-    paintDustPosition(naver, map);
-    return () => {};
+    // 먼지 위치를 가져오는 로직
+    const dustTimer = setInterval(() => {
+      paintDustPosition(naver, map);
+    }, 30000);
+
+    return () => {
+      navigator.geolocation.clearWatch(snapShotMyLocation);
+      clearInterval(dustTimer);
+    };
   }, []);
 
   useEffect(() => {}, [myCurrentPosition]);
@@ -61,7 +62,7 @@ const NaverMap = () => {
         ref={mapElement}
         style={{ width: "400px", height: "30vh" }}
         id={"map"}
-      />
+      ></div>
     </div>
   );
 
@@ -83,22 +84,6 @@ const NaverMap = () => {
         // icon: imagePath,
       });
     });
-  }
-
-  /**
-   * 내 위치 아이콘
-   * TODO 실시간 위치 가져와야함
-   */
-
-  function paintMyPosition(naver: any, map: naver.maps.Map) {
-    // const myLocation = new naver.maps.LatLng(
-    //   myCurrentPosition.lat,
-    //   myCurrentPosition.lng
-    // );
-    // new naver.maps.Marker({
-    //   position: myLocation,
-    //   map,
-    // });
   }
 };
 
