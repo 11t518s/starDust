@@ -15,6 +15,10 @@ export default function Home({}) {
       <div>
         <Link href={"/admin"}>어드민 가는 버튼</Link>
       </div>
+
+      <div>
+        <Link href={"/rank"}>랭킹으로 가는 버튼</Link>
+      </div>
     </>
   );
 }
