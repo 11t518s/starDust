@@ -28,3 +28,12 @@ export const CatchProgress = {
 } as const;
 
 export type catchProgress = typeof CatchProgress[keyof typeof CatchProgress];
+
+export type CatchInfo = {
+  catchProgress: catchProgress;
+  nickname: string;
+  phoneNumber: string | number;
+  startedAt: Date;
+  spent: number;
+  rank: number;
+};

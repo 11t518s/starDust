@@ -9,6 +9,9 @@ import {
   updateDoc,
   Timestamp,
   addDoc,
+  query,
+  orderBy,
+  limit,
 } from "@firebase/firestore";
 import {
   CatchProgress,
@@ -16,6 +19,7 @@ import {
   catchProgress,
   Catch,
   dustColors,
+  CatchInfo,
 } from "./types";
 
 class Dust extends FirebaseConfig {
@@ -115,6 +119,32 @@ class Dust extends FirebaseConfig {
       collection(this.db, this.DUST, this.SSU, this.CATCH, uid, this.DUST_ITEM),
       { itemId: dust, caughtAt: Timestamp.now() }
     );
+  }
+
+  async getRank(): Promise<CatchInfo[]> {
+    const fetchedRank = (
+      await getDocs(
+        query(
+          collection(this.db, this.DUST, this.SSU, this.CATCH),
+          orderBy("spent", "desc"),
+          limit(50)
+        )
+      )
+    ).docs.map((item) => item.data() as CatchInfo);
+
+    let rank = 0;
+
+    return fetchedRank.map((item, index) => {
+      if (index === 0) {
+        rank = rank + 1;
+        return { ...item, rank: index + 1 };
+      } else if (item.spent === Number(fetchedRank[index - 1].spent)) {
+        return { ...item, rank };
+      } else {
+        rank = rank + 1;
+        return { ...item, rank: index + 1 };
+      }
+    });
   }
 }
 
