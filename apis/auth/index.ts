@@ -53,16 +53,6 @@ export class Auth extends FirebaseConfig {
   getCurrentUser() {
     return this.auth.currentUser;
   }
-
-  getLoginStatus() {
-    return onAuthStateChanged(this.auth, (user) => {
-      if (user) {
-        return user;
-      } else {
-        return false;
-      }
-    });
-  }
 }
 
 export const authApi = new Auth();
