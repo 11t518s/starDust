@@ -88,8 +88,11 @@ const Index = () => {
     setIsSubmit(true);
     const { result } = await authApi.confirmSignIn(confirmCode);
     if (result) {
-      await dustApi.setInitialCatchInfo("1", phoneNumber, nickname);
-      await router.push("/map");
+      const user = await authApi.getCurrentUser();
+      if (user) {
+        await dustApi.setInitialCatchInfo(user.uid, phoneNumber, nickname);
+        await router.push("/map");
+      }
     } else {
       alert("코드 인증에 실패했습니다!");
       router.reload();
