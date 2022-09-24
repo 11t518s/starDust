@@ -26,9 +26,8 @@ const QrModal: React.FC<Props> = ({ setMyCatch }) => {
             <QrReader
               constraints={{ facingMode: "environment" }}
               onResult={handleReadQrData}
-              scanDelay={300}
+              scanDelay={1000}
             />
-            <button onClick={test}>이거 누르면 purple 보낼거임</button>
           </div>
         )}
       </Modal>
@@ -43,20 +42,8 @@ const QrModal: React.FC<Props> = ({ setMyCatch }) => {
     setIsModal(false);
   }
 
-  function handleReadQrData(
-    result: Result | undefined | null,
-    error: Error | undefined | null
-  ) {
-    if (!qrData || !result) {
-      return;
-    }
-
-    setQrData("purple");
-    setQrData(result.getText() as dustColors);
-  }
-
-  function test() {
-    setQrData("white");
+  function handleReadQrData(result: Result | undefined | null) {
+    result && setQrData(result.getText() as dustColors);
   }
 
   async function handleCatchDust() {
@@ -64,6 +51,8 @@ const QrModal: React.FC<Props> = ({ setMyCatch }) => {
     if (!qrData) {
       alert("먼지 잡기를 실패하셨습니다! 다시 시도해주세요");
 
+      setQrData(null);
+      setIsModal(false);
       return;
     }
 
@@ -71,6 +60,7 @@ const QrModal: React.FC<Props> = ({ setMyCatch }) => {
 
     setMyCatch((prev) => [...prev, { itemId: qrData, caughtAt: new Date() }]);
     setIsQRReader(false);
+    setQrData(null);
     setIsModal(false);
   }
 };
