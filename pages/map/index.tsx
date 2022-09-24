@@ -31,7 +31,7 @@ const Catch = () => {
   }
 
   if (catchStatus === CatchProgress.BeforeStart) {
-    return <BeforeStart setCatchStatus={setCatchStatus} />;
+    return <BeforeStart setCatchStatus={setCatchStatus} uid={uid} />;
   }
 
   if (catchStatus === CatchProgress.Finish) {

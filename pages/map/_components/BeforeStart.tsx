@@ -4,9 +4,10 @@ import { catchProgress } from "../../../apis/dust/types";
 
 type Props = {
   setCatchStatus: Dispatch<SetStateAction<catchProgress>>;
+  uid: string;
 };
 
-const BeforeStart: React.FC<Props> = ({ setCatchStatus }) => {
+const BeforeStart: React.FC<Props> = ({ setCatchStatus, uid }) => {
   return (
     <>
       <div>여기에 엄은 오버레이 씌우고 시작하기 버튼 넣을거임</div>
@@ -14,7 +15,7 @@ const BeforeStart: React.FC<Props> = ({ setCatchStatus }) => {
     </>
   );
   async function handleStartCatch() {
-    const changedStatus = await dustApi.startMyCatchProgress("1");
+    const changedStatus = await dustApi.startMyCatchProgress(uid);
     setCatchStatus(changedStatus);
   }
 };
