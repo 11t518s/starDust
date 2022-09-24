@@ -870,13 +870,13 @@ __metadata:
   linkType: hard
 
 "@humanwhocodes/config-array@npm:^0.10.4":
-  version: 0.10.4
-  resolution: "@humanwhocodes/config-array@npm:0.10.4"
+  version: 0.10.5
+  resolution: "@humanwhocodes/config-array@npm:0.10.5"
   dependencies:
     "@humanwhocodes/object-schema": ^1.2.1
     debug: ^4.1.1
     minimatch: ^3.0.4
-  checksum: d480e5d57e6d787565b6cff78e27c3d1b380692d4ffb0ada7d7f5957a56c9032f034da05a3e443065dbd0671ebf4d859036ced34e96b325bbc1badbae3c05300
+  checksum: af4fa2633c57414be22ddba0a072cc611ef9a07104542fa24bde918a0153b89b6e08ca6a20ccc9079de6079e219e2406e38414d1b662db8bb59a3ba9d6eee6e3
   languageName: node
   linkType: hard
 
@@ -3915,7 +3915,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.7.1":
+"prettier@npm:^2.7.1":
   version: 2.7.1
   resolution: "prettier@npm:2.7.1"
   bin:
@@ -4473,7 +4473,7 @@ __metadata:
     eslint-config-next: 12.2.5
     firebase: ^9.9.3
     next: 12.2.5
-    prettier: 2.7.1
+    prettier: ^2.7.1
     react: 18.2.0
     react-dom: 18.2.0
     react-qr-reader: ^3.0.0-beta-1

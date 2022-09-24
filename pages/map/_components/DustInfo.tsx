@@ -14,9 +14,10 @@ import { Catch, DustPositionType } from "../../../apis/dust/types";
 type Props = {
   myCatch: Catch[];
   setMyCatch: Dispatch<SetStateAction<Catch[]>>;
+  uid: string;
 };
 
-const DustInfo: React.FC<Props> = ({ myCatch, setMyCatch }) => {
+const DustInfo: React.FC<Props> = ({ myCatch, setMyCatch, uid }) => {
   const [dustPosition, setDustPosition] = useState<DustPositionType[]>([]);
   const [isFinish, setIsFinish] = useState(false);
 
@@ -73,12 +74,12 @@ const DustInfo: React.FC<Props> = ({ myCatch, setMyCatch }) => {
   }
 
   async function getMyDustCatch() {
-    const data = await dustApi.getMyCatches("1");
+    const data = await dustApi.getMyCatches(uid);
     setMyCatch(data);
   }
 
   async function handleFinishCatch() {
-    await dustApi.finishMyCatchProgress("1");
+    await dustApi.finishMyCatchProgress(uid);
   }
 };
 

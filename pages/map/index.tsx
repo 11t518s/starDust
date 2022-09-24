@@ -7,28 +7,23 @@ import { Catch, catchProgress, CatchProgress } from "../../apis/dust/types";
 import Loading from "./_components/Loading";
 import BeforeStart from "./_components/BeforeStart";
 import Finish from "./_components/Finish";
+import { authApi } from "../../apis/auth";
+import { useRouter } from "next/router";
 const NaverMap = dynamic(() => import("./_components/NaverMap"), {
   ssr: false,
 });
 
 const Catch = () => {
-  const [myCatch, setMyCatch] = useState<Catch[]>([]);
+  const router = useRouter();
 
-  // TODO 추후 recoil로 이전
+  const [myCatch, setMyCatch] = useState<Catch[]>([]);
   const [catchStatus, setCatchStatus] = useState<catchProgress>(
     CatchProgress.loading
   );
-
-  const handleCatchDust = async () => {
-    await dustApi.getMyCacheProgress("1");
-  };
-
-  const handleFinish = async () => {
-    await dustApi.finishMyCatchProgress("1");
-  };
+  const [uid, setUid] = useState("");
 
   useEffect(() => {
-    handleCheckStatus();
+    handleInitialSettings();
   }, []);
 
   if (catchStatus === CatchProgress.loading) {
@@ -47,16 +42,30 @@ const Catch = () => {
     <>
       <NaverMap></NaverMap>
       <div>여기에 네이버 지도 나와야지~~</div>
-      <DustInfo myCatch={myCatch} setMyCatch={setMyCatch} />
-      <QrModal setMyCatch={setMyCatch} />
+      <DustInfo myCatch={myCatch} setMyCatch={setMyCatch} uid={uid} />
+      <QrModal setMyCatch={setMyCatch} uid={uid} />
       <button onClick={handleCatchDust}>누르면 먼지 잡음</button>
       <button onClick={handleFinish}> 이러면 마무리 </button>
     </>
   );
+  async function handleCatchDust() {
+    await dustApi.getMyCacheProgress(uid);
+  }
 
-  async function handleCheckStatus() {
-    const status = await dustApi.getMyCacheProgress("1");
-    setCatchStatus(status);
+  async function handleFinish() {
+    await dustApi.finishMyCatchProgress(uid);
+  }
+
+  async function handleInitialSettings() {
+    const currentUser = await authApi.getCurrentUser();
+    if (!currentUser) {
+      await router.push("/login");
+      alert("로그인 하고 사용할 수 있습니다!");
+    } else {
+      setUid(currentUser.uid);
+      const status = await dustApi.getMyCacheProgress(currentUser.uid);
+      setCatchStatus(status);
+    }
   }
 };
 
