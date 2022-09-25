@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2f81e2a1-4f13-4d01-820f-2f41cca64e84" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/login/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,11 +79,11 @@
       <recent name="$PROJECT_DIR$/apis/admin" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/assets" />
       <recent name="$PROJECT_DIR$/assets/images" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/apis/auth" />
       <recent name="$PROJECT_DIR$/pages" />
-      <recent name="$PROJECT_DIR$/pages/index" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -112,6 +113,10 @@
       <workItem from="1663860985434" duration="6000" />
       <workItem from="1663891126829" duration="43000" />
       <workItem from="1663891183384" duration="2693000" />
+      <workItem from="1664005921968" duration="296000" />
+      <workItem from="1664008576014" duration="435000" />
+      <workItem from="1664023729510" duration="2437000" />
+      <workItem from="1664076075964" duration="10279000" />
     </task>
     <task id="LOCAL-00001" summary="feature: css reset">
       <created>1663435451709</created>
