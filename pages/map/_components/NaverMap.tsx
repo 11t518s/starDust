@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { dustApi } from "../../../apis/dust";
+import styled from "@emotion/styled";
 
 const FIRST_CENTER_LAT = 37.49638;
 const FIRST_CENTER_LNG = 126.95788;
@@ -59,13 +60,9 @@ const NaverMap = () => {
   useEffect(() => {}, [myCurrentPosition]);
 
   return (
-    <div>
-      <div
-        ref={mapElement}
-        style={{ width: "400px", height: "30vh" }}
-        id={"map"}
-      ></div>
-    </div>
+    <NaverMapContainer>
+      <NaverMapElement ref={mapElement} id={"map"} />
+    </NaverMapContainer>
   );
 
   /**
@@ -90,3 +87,13 @@ const NaverMap = () => {
 };
 
 export default NaverMap;
+
+const NaverMapElement = styled.div`
+  width: 100vw;
+  max-width: 600px;
+  height: 100vh;
+`;
+
+const NaverMapContainer = styled.div`
+  margin: 0 auto;
+`;

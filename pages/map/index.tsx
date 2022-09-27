@@ -9,6 +9,7 @@ import BeforeStart from "./_components/BeforeStart";
 import Finish from "./_components/Finish";
 import { authApi } from "../../apis/auth";
 import { useRouter } from "next/router";
+import Background from "../../components/Background";
 const NaverMap = dynamic(() => import("./_components/NaverMap"), {
   ssr: false,
 });
@@ -40,12 +41,14 @@ const Catch = () => {
 
   return (
     <>
-      <NaverMap></NaverMap>
-      <div>여기에 네이버 지도 나와야지~~</div>
-      <DustInfo myCatch={myCatch} setMyCatch={setMyCatch} uid={uid} />
-      <QrModal setMyCatch={setMyCatch} uid={uid} />
-      <button onClick={handleCatchDust}>누르면 먼지 잡음</button>
-      <button onClick={handleFinish}> 이러면 마무리 </button>
+      <Background>
+        <NaverMap />
+        <div>여기에 네이버 지도 나와야지~~</div>
+        <DustInfo myCatch={myCatch} setMyCatch={setMyCatch} uid={uid} />
+        <QrModal setMyCatch={setMyCatch} uid={uid} />
+        <button onClick={handleCatchDust}>누르면 먼지 잡음</button>
+        <button onClick={handleFinish}> 이러면 마무리 </button>
+      </Background>
     </>
   );
   async function handleCatchDust() {

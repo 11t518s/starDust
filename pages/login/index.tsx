@@ -25,42 +25,44 @@ const Index = () => {
       <Logo />
       <form>
         <PhoneNumberAndNickname>
- 
           <CustomLabel>
             input your <YellowText> nickname</YellowText>
           </CustomLabel>
           <CustomInput value={nickname} onChange={handleNicknameChange} />
 
-      <CustomLabel>
+          <CustomLabel>
             input your <YellowText> phone number</YellowText>
           </CustomLabel>
           <CustomInput
             value={phoneNumber || ""}
             type={"number"}
             onChange={handlePhoneNumberChange}
+            placeholder={"01012345678"}
           />
-
-
-          <CustomClickButton
-            id={"signIn"}
-            disabled={isConfirmCodeMode}
-            onClick={handleSubmitPhoneNumber}
-          >
-            Login {">"}
-          </CustomClickButton>
-        </PhoneNumberAndNickname>
-        {isConfirmCodeMode ? (
-          <>
-            <CustomInput value={confirmCode} onChange={handleConfirmCode} />
-            <button
-              disabled={isSubmit}
-              id={"conformCode"}
-              onClick={handleSubmitConfirmCode}
+          {isConfirmCodeMode ? (
+            <>
+              <CustomLabel>
+                please check <YellowText> confirm code</YellowText>
+              </CustomLabel>
+              <CustomInput value={confirmCode} onChange={handleConfirmCode} />
+              <CustomClickButton
+                disabled={isSubmit}
+                id={"conformCode"}
+                onClick={handleSubmitConfirmCode}
+              >
+                인증번호 확인하기
+              </CustomClickButton>
+            </>
+          ) : (
+            <CustomClickButton
+              id={"signIn"}
+              disabled={isConfirmCodeMode}
+              onClick={handleSubmitPhoneNumber}
             >
-              인증번호 확인하기
-            </button>
-          </>
-        ) : null}
+              Login {">"}
+            </CustomClickButton>
+          )}
+        </PhoneNumberAndNickname>
       </form>
     </Background>
   );
@@ -90,7 +92,6 @@ const Index = () => {
       alert("닉네임을 변경해주세요!");
       return;
     }
-    setIsConfirmCodeMode(true);
 
     const { result } = await authApi.signIn(phoneNumber, nickname);
     if (!result) {
@@ -99,6 +100,7 @@ const Index = () => {
       );
       return;
     }
+    setIsConfirmCodeMode(true);
   }
 
   async function handleSubmitConfirmCode(e: FormEvent<HTMLButtonElement>) {
@@ -127,7 +129,7 @@ const Index = () => {
     }
   }
 
-  async function checkLogin(){}
+  async function checkLogin() {}
 };
 
 export default Index;
@@ -143,6 +145,8 @@ const CustomInput = styled.input`
   border-width: 2px;
   border-color: #f9e219;
   margin: 0 30px;
+  color: white;
+  font-family: "NeoDunggeunmo";
 `;
 
 const CustomLabel = styled.label`
