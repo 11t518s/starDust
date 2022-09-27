@@ -25,7 +25,13 @@ const Index = () => {
       <Logo />
       <form>
         <PhoneNumberAndNickname>
+ 
           <CustomLabel>
+            input your <YellowText> nickname</YellowText>
+          </CustomLabel>
+          <CustomInput value={nickname} onChange={handleNicknameChange} />
+
+      <CustomLabel>
             input your <YellowText> phone number</YellowText>
           </CustomLabel>
           <CustomInput
@@ -34,10 +40,6 @@ const Index = () => {
             onChange={handlePhoneNumberChange}
           />
 
-          <CustomLabel>
-            input your <YellowText> nickname</YellowText>
-          </CustomLabel>
-          <CustomInput value={nickname} onChange={handleNicknameChange} />
 
           <CustomClickButton
             id={"signIn"}
