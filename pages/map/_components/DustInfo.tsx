@@ -10,6 +10,7 @@ import styled from "@emotion/styled";
 
 import Image from "next/image";
 import { Catch, DustPositionType } from "../../../apis/dust/types";
+import images from "../../../assets/images";
 
 type Props = {
   myCatch: Catch[];
@@ -54,14 +55,27 @@ const DustInfo: React.FC<Props> = ({ myCatch, setMyCatch, uid }) => {
       <DustContainer>
         {dustCatchProgress.map((dust, index) => (
           <DustItemContainer key={dust.id}>
-            {dust.isCatch && <ClearDust>잡았어여</ClearDust>}
-            <Image
-              key={index}
-              alt={"dustImage"}
-              src={dust.imagePath}
-              width={50}
-              height={50}
-            />
+            {dust.isCatch && (
+              <ClearDust>
+                <Image alt={"catch"} src={images.catch} />
+              </ClearDust>
+            )}
+            <WantedDust>
+              <Image
+                alt={"wanted"}
+                key={`${index}_${dust.id}`}
+                src={images.wanted}
+              />
+            </WantedDust>
+            <Dust>
+              <Image
+                key={index}
+                alt={"dustImage"}
+                src={dust.imagePath}
+                width={50}
+                height={50}
+              />
+            </Dust>
           </DustItemContainer>
         ))}
       </DustContainer>
@@ -89,12 +103,23 @@ const DustContainer = styled.ul`
   display: flex;
   flex-direction: row;
   position: absolute;
-  top: 0;
+  top: 20px;
 `;
 
-const DustItemContainer = styled.li``;
+const DustItemContainer = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const ClearDust = styled.div`
   z-index: 100;
   position: absolute;
+`;
+
+const WantedDust = styled.div`
+  position: absolute;
+`;
+const Dust = styled.div`
+  //margin-top: 20px;
 `;

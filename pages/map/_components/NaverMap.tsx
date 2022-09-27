@@ -47,6 +47,7 @@ const NaverMap = () => {
     );
 
     // 먼지 위치를 가져오는 로직
+    paintDustPosition(naver, map);
     const dustTimer = setInterval(() => {
       paintDustPosition(naver, map);
     }, 30000);
@@ -79,8 +80,7 @@ const NaverMap = () => {
       new naver.maps.Marker({
         position: dustLocation,
         map,
-        icon: "https://picsum.photos/20/20",
-        // icon: imagePath,
+        icon: { url: imagePath, scaledSize: new naver.maps.Size(30, 30) },
       });
     });
   }

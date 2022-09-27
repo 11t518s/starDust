@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: { domains: ["picsum.photos"] },
+  images: { domains: ["picsum.photos", "firebasestorage.googleapis.com"] },
   reactStrictMode: true,
   swcMinify: true,
 };

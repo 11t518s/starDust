@@ -10,6 +10,7 @@ import Finish from "./_components/Finish";
 import { authApi } from "../../apis/auth";
 import { useRouter } from "next/router";
 import Background from "../../components/Background";
+import styled from "@emotion/styled";
 
 const NaverMap = dynamic(() => import("./_components/NaverMap"), {
   ssr: false,
@@ -53,12 +54,13 @@ const Catch = () => {
             )}
             {catchStatus === CatchProgress.Finish && <Finish />}
 
-            <NaverMap />
-            <div>여기에 네이버 지도 나와야지~~</div>
-            <DustInfo myCatch={myCatch} setMyCatch={setMyCatch} uid={uid} />
-            <QrModal setMyCatch={setMyCatch} uid={uid} />
-            <button onClick={handleCatchDust}>누르면 먼지 잡음</button>
-            <button onClick={handleFinish}> 이러면 마무리 </button>
+            <MapContentContainer>
+              <NaverMap />
+              <DustInfo myCatch={myCatch} setMyCatch={setMyCatch} uid={uid} />
+              <QrModal setMyCatch={setMyCatch} uid={uid} />
+              <button onClick={handleCatchDust}>누르면 먼지 잡음</button>
+              <button onClick={handleFinish}> 이러면 마무리 </button>
+            </MapContentContainer>
           </>
         )}
       </Background>
@@ -75,3 +77,7 @@ const Catch = () => {
 };
 
 export default Catch;
+
+const MapContentContainer = styled.div`
+  margin: 0 auto;
+`;
