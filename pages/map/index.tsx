@@ -10,6 +10,7 @@ import Finish from "./_components/Finish";
 import { authApi } from "../../apis/auth";
 import { useRouter } from "next/router";
 import Background from "../../components/Background";
+
 const NaverMap = dynamic(() => import("./_components/NaverMap"), {
   ssr: false,
 });
@@ -24,51 +25,52 @@ const Catch = () => {
   const [uid, setUid] = useState("");
 
   useEffect(() => {
-    handleInitialSettings();
+    const subscribe = authApi.Auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        setUid(user.uid);
+        const status = await dustApi.getMyCacheProgress(user.uid);
+        setCatchStatus(status);
+      } else {
+        await router.push("/login");
+        alert("로그인 하고 사용할 수 있습니다!");
+      }
+    });
+    return () => {
+      subscribe();
+    };
   }, []);
-
-  if (catchStatus === CatchProgress.loading) {
-    return <Loading />;
-  }
-
-  if (catchStatus === CatchProgress.BeforeStart) {
-    return <BeforeStart setCatchStatus={setCatchStatus} uid={uid} />;
-  }
-
-  if (catchStatus === CatchProgress.Finish) {
-    return <Finish />;
-  }
 
   return (
     <>
       <Background>
-        <NaverMap />
-        <div>여기에 네이버 지도 나와야지~~</div>
-        <DustInfo myCatch={myCatch} setMyCatch={setMyCatch} uid={uid} />
-        <QrModal setMyCatch={setMyCatch} uid={uid} />
-        <button onClick={handleCatchDust}>누르면 먼지 잡음</button>
-        <button onClick={handleFinish}> 이러면 마무리 </button>
+        {!uid ? (
+          <Loading />
+        ) : (
+          <>
+            {catchStatus === CatchProgress.loading && <Loading />}
+            {catchStatus === CatchProgress.BeforeStart && (
+              <BeforeStart setCatchStatus={setCatchStatus} uid={uid} />
+            )}
+            {catchStatus === CatchProgress.Finish && <Finish />}
+
+            <NaverMap />
+            <div>여기에 네이버 지도 나와야지~~</div>
+            <DustInfo myCatch={myCatch} setMyCatch={setMyCatch} uid={uid} />
+            <QrModal setMyCatch={setMyCatch} uid={uid} />
+            <button onClick={handleCatchDust}>누르면 먼지 잡음</button>
+            <button onClick={handleFinish}> 이러면 마무리 </button>
+          </>
+        )}
       </Background>
     </>
   );
+
   async function handleCatchDust() {
     await dustApi.getMyCacheProgress(uid);
   }
 
   async function handleFinish() {
     await dustApi.finishMyCatchProgress(uid);
-  }
-
-  async function handleInitialSettings() {
-    const currentUser = await authApi.getCurrentUser();
-    if (!currentUser) {
-      await router.push("/login");
-      alert("로그인 하고 사용할 수 있습니다!");
-    } else {
-      setUid(currentUser.uid);
-      const status = await dustApi.getMyCacheProgress(currentUser.uid);
-      setCatchStatus(status);
-    }
   }
 };
 

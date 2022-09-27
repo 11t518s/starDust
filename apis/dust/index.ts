@@ -91,8 +91,10 @@ class Dust extends FirebaseConfig {
   async finishMyCatchProgress(uid: string) {
     const finishedAt = Timestamp.now();
     const myCatchDoc = await this.getMyCatchDoc(uid);
+
     const startedAt = myCatchDoc.get("startedAt");
     const myProgress = myCatchDoc.get("catchProgress");
+
     if (myProgress === CatchProgress.Finish) {
       return;
     }

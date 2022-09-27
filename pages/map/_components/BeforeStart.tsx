@@ -1,6 +1,8 @@
+import styled from "@emotion/styled";
 import React, { Dispatch, SetStateAction } from "react";
 import { dustApi } from "../../../apis/dust";
 import { catchProgress } from "../../../apis/dust/types";
+import { LoadingOverlay } from "./Loading";
 
 type Props = {
   setCatchStatus: Dispatch<SetStateAction<catchProgress>>;
@@ -9,10 +11,11 @@ type Props = {
 
 const BeforeStart: React.FC<Props> = ({ setCatchStatus, uid }) => {
   return (
-    <>
-      <div>여기에 엄은 오버레이 씌우고 시작하기 버튼 넣을거임</div>
-      <button onClick={handleStartCatch}> 이거 누르면 게임 시작</button>
-    </>
+    <LoadingOverlay>
+      <CustomButton onClick={handleStartCatch}>
+        이거 누르면 게임 시작
+      </CustomButton>
+    </LoadingOverlay>
   );
   async function handleStartCatch() {
     const changedStatus = await dustApi.startMyCatchProgress(uid);
@@ -21,3 +24,5 @@ const BeforeStart: React.FC<Props> = ({ setCatchStatus, uid }) => {
 };
 
 export default BeforeStart;
+
+const CustomButton = styled.button``;

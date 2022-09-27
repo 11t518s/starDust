@@ -1,5 +1,4 @@
 import {
-  onAuthStateChanged,
   RecaptchaVerifier,
   signInWithPhoneNumber,
   updateProfile,
@@ -38,8 +37,6 @@ export class Auth extends FirebaseConfig {
     }
   }
 
-  private async updateUserProfile() {}
-
   async confirmSignIn(confirmCode: string): Promise<PhoneNumberLoginType> {
     try {
       await (window as any).confirmationResult.confirm(confirmCode);
@@ -52,6 +49,10 @@ export class Auth extends FirebaseConfig {
 
   getCurrentUser() {
     return this.auth.currentUser;
+  }
+
+  Auth() {
+    return this.auth;
   }
 }
 

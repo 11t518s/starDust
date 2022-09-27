@@ -18,7 +18,14 @@ const Index = () => {
   const [isSubmit, setIsSubmit] = useState(false);
 
   useEffect(() => {
-    checkLogin();
+    const subscribe = authApi.Auth().onAuthStateChanged(async (user) => {
+      if (user) {
+        await router.push("/map");
+      }
+    });
+    return () => {
+      subscribe();
+    };
   }, []);
   return (
     <Background>
@@ -109,20 +116,17 @@ const Index = () => {
     setIsSubmit(true);
     const { result } = await authApi.confirmSignIn(confirmCode);
     if (result) {
-      const user = authApi.getCurrentUser();
-      // TODO 여기서 이미 했는지 안했는지 체크
-
-      if (user) {
-        const catchProgress = (await dustApi.getMyCatchDoc(user.uid)).get(
-          "catchProgress"
-        );
-
-        if (!catchProgress) {
-          await dustApi.setInitialCatchInfo(user.uid, phoneNumber, nickname);
+      authApi.Auth().onAuthStateChanged(async (user) => {
+        if (user) {
+          const catchProgress = (await dustApi.getMyCatchDoc(user.uid)).get(
+            "catchProgress"
+          );
+          if (!catchProgress) {
+            await dustApi.setInitialCatchInfo(user.uid, phoneNumber, nickname);
+          }
+          await router.push("/map");
         }
-
-        await router.push("/map");
-      }
+      });
     } else {
       alert("코드 인증에 실패했습니다!");
       router.reload();
