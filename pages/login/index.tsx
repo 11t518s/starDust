@@ -125,12 +125,7 @@ const Index = () => {
     }
   }
 
-  async function checkLogin() {
-    const user = authApi.getCurrentUser();
-    if (!user) {
-      await router.push("/map");
-    }
-  }
+  async function checkLogin(){}
 };
 
 export default Index;
