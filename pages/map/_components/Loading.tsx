@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
-import React from "react";
 
 const Loading = () => {
-  return <LoadingOverlay>로딩중 오버레이 띄울거임</LoadingOverlay>;
+  return <LoadingOverlay>Loading...</LoadingOverlay>;
 };
 
 export default Loading;
