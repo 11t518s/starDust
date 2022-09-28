@@ -77,7 +77,6 @@ const Catch = () => {
                   />
                 </Link>
               </RankContainer>
-              <button onClick={handleFinish}> 이러면 마무리 </button>
             </MapContentContainer>
           </>
         )}

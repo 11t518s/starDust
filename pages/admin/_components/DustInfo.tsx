@@ -41,6 +41,7 @@ const DustInfo = () => {
 
   async function handleUpdateDust(dustId: DustPositionType["id"]) {
     setIsLoading(true);
+
     try {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(async (position) => {
