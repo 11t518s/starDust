@@ -17,16 +17,6 @@ const Index = () => {
   const [confirmCode, setConfirmCode] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
 
-  useEffect(() => {
-    const subscribe = authApi.Auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        await router.push("/map");
-      }
-    });
-    return () => {
-      subscribe();
-    };
-  }, []);
   return (
     <Background>
       <Logo />
