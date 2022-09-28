@@ -30,7 +30,7 @@ const Admin = () => {
   }
 
   function passwordSuccessChecker() {
-    if (password === "오늘부터 웹 공부해야지!") {
+    if (password === "웹웹웹") {
       setIsOwner(true);
     } else {
       alert("누구세요..? 여기 들어오시면 안돼요");
