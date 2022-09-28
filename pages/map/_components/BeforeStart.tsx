@@ -12,9 +12,7 @@ type Props = {
 const BeforeStart: React.FC<Props> = ({ setCatchStatus, uid }) => {
   return (
     <LoadingOverlay>
-      <CustomButton onClick={handleStartCatch}>
-        이거 누르면 게임 시작
-      </CustomButton>
+      <CustomButton onClick={handleStartCatch}>게임 시작</CustomButton>
     </LoadingOverlay>
   );
   async function handleStartCatch() {
@@ -25,4 +23,12 @@ const BeforeStart: React.FC<Props> = ({ setCatchStatus, uid }) => {
 
 export default BeforeStart;
 
-const CustomButton = styled.button``;
+const CustomButton = styled.button`
+  background-color: transparent;
+  border-width: 0;
+  color: #f9e219;
+  font-family: "NeoDunggeunmo";
+  font-size: 1.6rem;
+  margin-top: 30px;
+  cursor: pointer;
+`;
