@@ -93,7 +93,7 @@ const DustContainer = styled.ul`
   flex-direction: row;
   position: absolute;
   top: 20px;
-  width: 100vw;
+  width: 80vw;
   max-width: 600px;
 `;
 

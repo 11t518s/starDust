@@ -104,5 +104,5 @@ const RankContainer = styled.div`
   cursor: pointer;
   left: 10px;
   z-index: 1002;
-  bottom: 100px;
+  bottom: 50px;
 `;
