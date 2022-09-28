@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { dustApi } from "../../../apis/dust";
 import styled from "@emotion/styled";
+import { Catch } from "../../../apis/dust/types";
+import { catchClause } from "@babel/types";
 
 const FIRST_CENTER_LAT = 37.49638;
 const FIRST_CENTER_LNG = 126.95788;
@@ -58,8 +60,6 @@ const NaverMap = () => {
     };
   }, []);
 
-  useEffect(() => {}, [myCurrentPosition]);
-
   return (
     <NaverMapContainer>
       <NaverMapElement ref={mapElement} id={"map"} />
@@ -75,6 +75,7 @@ const NaverMap = () => {
 
     dustPosition.map((dust) => {
       const { lat, lng, imagePath } = dust;
+
       const dustLocation = new naver.maps.LatLng(lat, lng);
 
       new naver.maps.Marker({

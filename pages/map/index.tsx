@@ -11,6 +11,9 @@ import { authApi } from "../../apis/auth";
 import { useRouter } from "next/router";
 import Background from "../../components/Background";
 import styled from "@emotion/styled";
+import Link from "next/link";
+import Image from "next/image";
+import images from "../../assets/images";
 
 const NaverMap = dynamic(() => import("./_components/NaverMap"), {
   ssr: false,
@@ -58,7 +61,16 @@ const Catch = () => {
               <NaverMap />
               <DustInfo myCatch={myCatch} setMyCatch={setMyCatch} uid={uid} />
               <QrModal setMyCatch={setMyCatch} uid={uid} />
-              <button onClick={handleCatchDust}>누르면 먼지 잡음</button>
+              <RankContainer>
+                <Link href={"rank"}>
+                  <Image
+                    src={images.rank}
+                    alt={"rank"}
+                    width={119}
+                    height={45}
+                  />
+                </Link>
+              </RankContainer>
               <button onClick={handleFinish}> 이러면 마무리 </button>
             </MapContentContainer>
           </>
@@ -66,10 +78,6 @@ const Catch = () => {
       </Background>
     </>
   );
-
-  async function handleCatchDust() {
-    await dustApi.getMyCacheProgress(uid);
-  }
 
   async function handleFinish() {
     await dustApi.finishMyCatchProgress(uid);
@@ -80,4 +88,11 @@ export default Catch;
 
 const MapContentContainer = styled.div`
   margin: 0 auto;
+`;
+
+const RankContainer = styled.div`
+  position: absolute;
+  left: 10px;
+  z-index: 1002;
+  bottom: 50px;
 `;

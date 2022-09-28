@@ -4,6 +4,9 @@ import { Result } from "@zxing/library";
 import Modal from "../../../components/modal";
 import { dustApi } from "../../../apis/dust";
 import { Catch, dustColors } from "../../../apis/dust/types";
+import styled from "@emotion/styled";
+import Image from "next/image";
+import images from "../../../assets/images";
 
 type Props = {
   setMyCatch: Dispatch<SetStateAction<Catch[]>>;
@@ -17,24 +20,27 @@ const QrModal: React.FC<Props> = ({ setMyCatch, uid }) => {
 
   return (
     <>
-      <button onClick={handleQrReaderOpen}>
-        버튼을 눌러서 먼지를 잡아주세요
-      </button>
-      <Modal isModal={isModal} closeModal={handleCloseModal}>
-        {qrData && <button onClick={handleCatchDust}>먼지 잡기</button>}
-        {isQRReader && (
-          <div>
-            <QrReader
-              constraints={{ facingMode: "environment" }}
-              onResult={handleReadQrData}
-              scanDelay={1000}
-            />
-          </div>
-        )}
-      </Modal>
+      <CustomButton onClick={handleQrReaderOpen}>
+        <Image src={images.qr} alt={"go to qr"} />
+      </CustomButton>
+      {isModal ? (
+        <Modal isModal={isModal} closeModal={handleCloseModal}>
+          {qrData && <button onClick={handleCatchDust}>먼지 잡기</button>}
+          {isQRReader && (
+            <div>
+              <QrReader
+                constraints={{ facingMode: "environment" }}
+                onResult={handleReadQrData}
+                scanDelay={1000}
+              />
+            </div>
+          )}
+        </Modal>
+      ) : null}
     </>
   );
   function handleQrReaderOpen() {
+    console.log(1111);
     setIsQRReader(true);
     setIsModal(true);
   }
@@ -65,3 +71,19 @@ const QrModal: React.FC<Props> = ({ setMyCatch, uid }) => {
 };
 
 export default QrModal;
+
+const CustomButton = styled.div`
+  z-index: 1000;
+  position: absolute;
+  bottom: 50px;
+  right: 20px;
+  background-color: white;
+
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+`;

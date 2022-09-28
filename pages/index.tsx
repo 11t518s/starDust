@@ -35,17 +35,6 @@ export default function Home({}) {
           <Logo />
 
           <DescriptionText>{initialText.slice(0, textLength)}</DescriptionText>
-          {/*<div>*/}
-          {/*  <Link href={"/map"}>지도로 가는 버튼</Link>*/}
-          {/*</div>*/}
-
-          {/*<div>*/}
-          {/*  <Link href={"/admin"}>어드민 가는 버튼</Link>*/}
-          {/*</div>*/}
-
-          {/*<div>*/}
-          {/*  <Link href={"/rank"}>랭킹으로 가는 버튼</Link>*/}
-          {/*</div>*/}
         </ContentContainer>
       </Background>
       <LoginContainer>

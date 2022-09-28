@@ -101,9 +101,12 @@ export default DustInfo;
 
 const DustContainer = styled.ul`
   display: flex;
+  justify-content: space-around;
   flex-direction: row;
   position: absolute;
   top: 20px;
+  width: 100vw;
+  max-width: 600px;
 `;
 
 const DustItemContainer = styled.li`
@@ -121,5 +124,5 @@ const WantedDust = styled.div`
   position: absolute;
 `;
 const Dust = styled.div`
-  //margin-top: 20px;
+  margin-top: 20px;
 `;

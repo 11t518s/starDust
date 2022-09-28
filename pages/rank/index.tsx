@@ -3,6 +3,7 @@ import { dustApi } from "../../apis/dust";
 import { CatchInfo } from "../../apis/dust/types";
 import { changeSecondToTime } from "../../utils/timeUtils";
 import styled from "@emotion/styled";
+import Background from "../../components/Background";
 
 const Rank = () => {
   const [rankList, setRankList] = useState<CatchInfo[]>([]);
@@ -12,8 +13,7 @@ const Rank = () => {
   }, []);
 
   return (
-    <>
-      <div>여기에 랭킹 나와야함</div>
+    <Background>
       <ul>
         {rankList.map((rank, index) => {
           return (
@@ -25,7 +25,7 @@ const Rank = () => {
           );
         })}
       </ul>
-    </>
+    </Background>
   );
 
   async function getRank() {

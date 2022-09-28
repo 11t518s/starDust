@@ -12,7 +12,7 @@ const Modal: React.FC<Props> = ({ isModal, closeModal, children, title }) => {
   return (
     <>
       {isModal ? (
-        <StyledModalOverlay>
+        <StyledModalOverlay onClick={() => closeModal()}>
           <StyledModal>
             <StyledModalHeader>
               <StyledModalCloseButton onClick={() => closeModal()}>
@@ -48,17 +48,17 @@ const StyledModalHeader = styled.div`
 const StyledModal = styled.div`
   background: white;
   width: 500px;
-  height: 600px;
+  height: 400px;
   border-radius: 15px;
   padding: 15px;
 `;
 const StyledModalOverlay = styled.div`
-  z-index: 999;
+  z-index: 10023;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
