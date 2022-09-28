@@ -56,7 +56,7 @@ const DustInfo = () => {
         alert("그,, 혹시,, 지도 허용 안했니... 다시켜서 해줘,,");
       }
     } catch (error) {
-      console.error(error);
+      alert("지도가 허용되지있지 않습니다!");
     }
   }
 

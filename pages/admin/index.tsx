@@ -10,11 +10,7 @@ const Admin = () => {
       {isOwner ? (
         <div>
           이제 먼지들 위치를 바꾸겠습니다
-          <Suspense
-            fallback={<div> 로딩중,, 너넨 유저 아니니까 참아줘.. </div>}
-          >
-            <DustInfo />
-          </Suspense>
+          <DustInfo />
         </div>
       ) : (
         <div>
