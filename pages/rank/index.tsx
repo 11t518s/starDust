@@ -19,8 +19,8 @@ const Rank = () => {
           return (
             <RankItemContainer key={index}>
               <Ranking>{rank.rank}</Ranking>
-              <SpentTime>{changeSecondToTime(rank.spent)}</SpentTime>
               <Nickname>{rank.nickname}</Nickname>
+              <SpentTime>{changeSecondToTime(rank.spent)}</SpentTime>
             </RankItemContainer>
           );
         })}
@@ -39,7 +39,6 @@ export default Rank;
 const RankItemContainer = styled.div`
   display: flex;
   width: 100vw;
-  justify-content: space-around;
 `;
 
 const Ranking = styled.div``;

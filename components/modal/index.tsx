@@ -29,7 +29,10 @@ const Modal: React.FC<Props> = ({ isModal, closeModal, children, title }) => {
 };
 export default Modal;
 
-const StyledModalTitle = styled.div``;
+const StyledModalTitle = styled.div`
+  text-align: center;
+  color: black;
+`;
 
 const StyledModalCloseButton = styled.div`
   cursor: pointer;
@@ -48,7 +51,6 @@ const StyledModalHeader = styled.div`
 const StyledModal = styled.div`
   background: white;
   width: 500px;
-  height: 400px;
   border-radius: 15px;
   padding: 15px;
 `;

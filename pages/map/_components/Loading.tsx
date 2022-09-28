@@ -11,11 +11,12 @@ export const LoadingOverlay = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: absolute;
   opacity: 0.3;
   background-color: black;
   color: white;
-  z-index: 1000;
+  z-index: 1007;
 `;

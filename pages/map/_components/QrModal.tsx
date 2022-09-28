@@ -24,8 +24,11 @@ const QrModal: React.FC<Props> = ({ setMyCatch, uid }) => {
         <Image src={images.qr} alt={"go to qr"} />
       </CustomButton>
       {isModal ? (
-        <Modal isModal={isModal} closeModal={handleCloseModal}>
-          {qrData && <button onClick={handleCatchDust}>먼지 잡기</button>}
+        <Modal
+          title={"qr코드를 인식시켜서 먼지를 잡아주세요"}
+          isModal={isModal}
+          closeModal={handleCloseModal}
+        >
           {isQRReader && (
             <div>
               <QrReader
@@ -34,6 +37,10 @@ const QrModal: React.FC<Props> = ({ setMyCatch, uid }) => {
                 scanDelay={1000}
               />
             </div>
+          )}
+
+          {qrData && (
+            <CatchButton onClick={handleCatchDust}>먼지 잡기</CatchButton>
           )}
         </Modal>
       ) : null}
@@ -86,4 +93,15 @@ const CustomButton = styled.div`
   align-items: center;
   border-radius: 10px;
   cursor: pointer;
+`;
+
+const CatchButton = styled.div`
+  background-color: transparent;
+  border-width: 0;
+  color: black;
+  font-family: "NeoDunggeunmo";
+  font-size: 1.6rem;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 30px;
 `;

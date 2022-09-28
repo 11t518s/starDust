@@ -44,14 +44,6 @@ const DustInfo: React.FC<Props> = ({ myCatch, setMyCatch, uid }) => {
 
   return (
     <>
-      {isFinish && (
-        <>
-          <button onClick={handleFinishCatch}>
-            그리고 여기 눌러서 완료하기 버튼 누르기
-          </button>
-          <div>완료하면 이렇게 오버레이</div>
-        </>
-      )}
       <DustContainer>
         {dustCatchProgress.map((dust, index) => (
           <DustItemContainer key={dust.id}>
@@ -90,10 +82,6 @@ const DustInfo: React.FC<Props> = ({ myCatch, setMyCatch, uid }) => {
   async function getMyDustCatch() {
     const data = await dustApi.getMyCatches(uid);
     setMyCatch(data);
-  }
-
-  async function handleFinishCatch() {
-    await dustApi.finishMyCatchProgress(uid);
   }
 };
 

@@ -5,8 +5,11 @@ import { LoadingOverlay } from "./Loading";
 const Finish = () => {
   return (
     <LoadingOverlay>
-      여기도 오버레이넣고 완료됐다고 말해주기
-      <Link href={"rank"}>랭킹 보러가기</Link>
+      <div>먼지를 모두 잡았습니다!</div>
+      <br />
+      <div>
+        <Link href={"rank"}>랭킹 보러가기</Link>
+      </div>
     </LoadingOverlay>
   );
 };

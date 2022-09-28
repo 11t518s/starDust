@@ -44,6 +44,12 @@ const Catch = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (myCatch.length >= 5) {
+      handleFinish();
+    }
+  }, [myCatch]);
+
   return (
     <>
       <Background>
@@ -80,7 +86,11 @@ const Catch = () => {
   );
 
   async function handleFinish() {
-    await dustApi.finishMyCatchProgress(uid);
+    const progress = await dustApi.getMyCacheProgress(uid);
+    if (progress !== CatchProgress.Finish) {
+      await dustApi.finishMyCatchProgress(uid);
+    }
+    setCatchStatus(CatchProgress.Finish);
   }
 };
 
@@ -92,6 +102,7 @@ const MapContentContainer = styled.div`
 
 const RankContainer = styled.div`
   position: absolute;
+  cursor: pointer;
   left: 10px;
   z-index: 1002;
   bottom: 50px;
