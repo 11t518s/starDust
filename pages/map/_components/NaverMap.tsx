@@ -92,7 +92,7 @@ export default NaverMap;
 const NaverMapElement = styled.div`
   width: 100vw;
   max-width: 600px;
-  height: 100vh;
+  height: 90vh;
 `;
 
 const NaverMapContainer = styled.div`

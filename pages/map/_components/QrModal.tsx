@@ -82,7 +82,7 @@ export default QrModal;
 const CustomButton = styled.div`
   z-index: 1000;
   position: absolute;
-  bottom: 50px;
+  bottom: 100px;
   right: 20px;
   background-color: white;
 

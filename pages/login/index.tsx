@@ -145,7 +145,7 @@ const CustomInput = styled.input`
 
 const CustomLabel = styled.label`
   margin-left: 30px;
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: row;
